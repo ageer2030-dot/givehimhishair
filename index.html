@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Give him his hair!</title>
+
+  <style>
+    canvas{
+  background-color: transparent;
+  position: absolute;
+}
+
+img{
+  z-index: -1;
+  position: absolute;
+}
+  </style>
+
+  
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400"> </canvas>
+<input id="color" type="color">
+<img src="https://cdn.pixabay.com/photo/2013/07/13/12/43/bald-head-160187_1280.png" width="300" height="400" draggable="false">
+
+
+  <script>
+    let Paint = false
+var x = 0
+var y = 0
+
+$( "#canvas" ).on( "mousedown", function() {
+  Paint = true;
+} );
+
+$( "html" ).on( "mouseup", function() {
+  Paint = false;
+} );
+
+function Update()
+{
+  if(Paint){
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = document.getElementById("color").value;
+    ctx.fillRect(x - 15, y - 15, 15, 15);
+  }
+  requestAnimationFrame(Update)
+}
+
+function UpdateMouse(e){
+  x = e.pageX
+  y = e.pageY
+}
+
+document.addEventListener('mousemove', function(e){
+    UpdateMouse(e);
+})
+
+Update()
+  </script>
+</body>
+</html>
